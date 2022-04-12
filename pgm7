@@ -1,0 +1,188 @@
+Database changed
+MariaDB [base]> create table author(author_id int primary key,author_name varchar(10),city varchar(10),country varchar(10));
+
+MariaDB [base]> insert into author values(101,'apj abdul kalam','delhi','india');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+MariaDB [base]> insert into author values(102,'kamala suraiya','thrissur','india');
+Query OK, 1 row affected, 1 warning (0.03 sec)
+
+MariaDB [base]> insert into author values(103,'foster','nework','america');
+Query OK, 1 row affected (0.44 sec)
+
+MariaDB [base]> insert into author values(104,'Anungla','nagaland','nagaland');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [base]> insert into author values(105,'vikra','tamilnadu','india');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [base]> select * from author;
++-----------+-------------+-----------+----------+
+| author_id | author_name | city      | country  |
++-----------+-------------+-----------+----------+
+|       101 | apj abdul   | delhi     | india    |
+|       102 | kamala sur  | thrissur  | india    |
+|       103 | foster      | nework    | america  |
+|       104 | Anungla     | nagaland  | nagaland |
+|       105 | vikra       | tamilnadu | india    |
++-----------+-------------+-----------+----------+
+5 rows in set (0.01 sec)
+
+create table publisher(id int primary key,name varchar(10),city varchar(10),country varchar(10));
+Query OK, 0 rows affected (0.24 sec)
+
+MariaDB [base]> insert into publisher values(1,'Roli Books','ernakulam','india');
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [base]> insert into publisher values(2,'Aleph Book','coimbathore','india');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+MariaDB [base]> insert into publisher values(3,'alexa','nework','america');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [base]> insert into publisher values(4,'flower','nagaland','nagaland');
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [base]> insert into publisher values(5,'yathra','madhurai','india');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [base]> select * from publisher;
++----+------------+------------+----------+
+| id | name       | city       | country  |
++----+------------+------------+----------+
+|  1 | Roli Books | ernakulam  | india    |
+|  2 | Aleph Book | coimbathor | india    |
+|  3 | alexa      | nework     | america  |
+|  4 | flower     | nagaland   | nagaland |
+|  5 | yathra     | madhurai   | india    |
++----+------------+------------+----------+
+5 rows in set (0.00 sec)
+
+MariaDB [base]> create table category(id int primary key,description varchar(15));
+Query OK, 0 rows affected (0.32 sec)
+
+MariaDB [base]> insert into category values(11,'motivation');
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [base]> insert into category values(12,'novel');
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [base]> insert into category values(13,'story');
+Query OK, 1 row affected (0.43 sec)
+
+
+MariaDB [base]> insert into  category values(15,'motion');
+Query OK, 1 row affected (0.04 sec)
+
+
+MariaDB [base]> insert into  category values(16,'fiction');
+Query OK, 1 row affected (0.43 sec)
+
+MariaDB [base]> select * from category;
++----+-------------+
+| id | description |
++----+-------------+
+| 11 | motivation  |
+| 12 | novel       |
+| 13 | story       |     |
+| 15 | motion      |
+| 16 | fiction     |
++----+-------------+
+6 rows in set (0.00 sec)
+
+MariaDB [base]> create table book(book_id int,title varchar(15),author_id int references author(author_id),id int references publisher(id),c_id int references category (id),year year,price int);
+Query OK, 0 rows affected (0.23 sec)
+
+MariaDB [base]> insert into book values(1001,'wings of fire',101,1,11,1975,500);
+Query OK, 1 row affected (0.43 sec)
+
+MariaDB [base]> insert into book values(1002,'ente logham',102,2,12,1996,650);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [base]> insert into book values(1003,'bood',103,3,13,1989,700);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [base]> insert into book values(1004,'anungla',104,3,15,1998,900);
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [base]> insert into book values(1005,'life',105,5,15,1997,870);
+Query OK, 1 row affected (0.46 sec)
+
+MariaDB [base]> select * from book;
++---------+---------------+-----------+------+------+------+-------+
+| book_id | title         | author_id | id   | c_id | year | price |
++---------+---------------+-----------+------+------+------+-------+
+|    1001 | wings of fire |       101 |    1 |   11 | 1975 |   500 |
+|    1002 | ente logham   |       102 |    2 |   12 | 1996 |   650 |
+|    1003 | wood          |       103 |    3 |   13 | 1989 |   700 |
+|    1004 | anungla       |       104 |    3 |   15 | 1998 |   900 |
+|    1005 | life          |       105 |    5 |   15 | 1997 |   870 |
++---------+---------------+-----------+------+------+------+-------+
+5 rows in set (0.00 sec)
+
+MariaDB [base]> select book_id,title,price from book;
++---------+---------------+-------+
+| book_id | title         | price |
++---------+---------------+-------+
+|    1001 | wings of fire |   500 |
+|    1002 | ente logham   |   650 |
+|    1003 | bood          |   700 |
+|    1004 | anungla       |   900 |
+|    1005 | life          |   870 |
++---------+---------------+-------+
+5 rows in set (0.00 sec)
+
+MariaDB [base]> select * from book where title like 'w%';
++---------+---------------+-----------+------+------+------+-------+
+| book_id | title         | author_id | id   | c_id | year | price |
++---------+---------------+-----------+------+------+------+-------+
+|    1001 | wings of fire |       101 |    1 |   11 | 1975 |   500 |
+|    1003 | wood          |       103 |    3 |   13 | 1989 |   700 |
++---------+---------------+-----------+------+------+------+-------+
+2 rows in set (0.00 sec)
+
+MariaDB [base]> select title from book where price>500;
++-------------+
+| title       |
++-------------+
+| ente logham |
+| wood        |
+| anungla     |
+| life        |
++-------------+
+4 rows in set (0.00 sec)
+
+MariaDB [base]> select title from book b left join category c on b.c_id=c.id where c.description!='novel';
++---------------+
+| title         |
++---------------+
+| wings of fire |
+| wood          |
+| anungla       |
+| life          |
++---------------+
+4 rows in set (0.00 sec)
+
+MariaDB [base]> select title,author.author_name,publisher.name from book left join author on author.author_id=book.author_id left join publisher on publisher.id=book.id where year in(1996,1997,1998);
++-------------+-------------+------------+
+| title       | author_name | name       |
++-------------+-------------+------------+
+| ente logham | kamala sur  | Aleph Book |
+| anungla     | Anungla     | alexa      |
+| life        | Anungla     | yathra     |
++-------------+-------------+------------+
+3 rows in set (0.00 sec)
+
+
+MariaDB [base]> select * from book where price between 600 and 800;
++---------+-------------+-----------+------+------+------+-------+
+| book_id | title       | author_id | id   | c_id | year | price |
++---------+-------------+-----------+------+------+------+-------+
+|    1002 | ente logham |       102 |    2 |   12 | 1996 |   650 |
+|    1003 | wood        |       103 |    3 |   13 | 1989 |   700 |
++---------+-------------+-----------+------+------+------+-------+
+2 rows in set (0.01 sec)
+
+
+
+

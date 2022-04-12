@@ -1,0 +1,97 @@
+MariaDB [anagha]> create table employee(emp_id int,emp_name varchar(10),city varchar(10),salary int,age int);
+Query OK, 0 rows affected (0.65 sec)
+
+MariaDB [anagha]> insert into employee values(1,'Angelina','chicago',200000,30);
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [anagha]> insert into employee values(2,'Robert','Austin',300000,26);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [anagha]> insert into employee values(3,'Christian','Denver',100000,42);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [anagha]> insert into employee values(4,'Kristen','Washington',500000,29);
+Query OK, 1 row affected (0.43 sec)
+
+MariaDB [anagha]> insert into employee values(5,'Russell','Losangels',200000,36);
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [anagha]> insert into employee values(6,'Marry','Canada',600000,48);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [anagha]> select * from employee;
++--------+-----------+------------+--------+------+
+| emp_id | emp_name  | city       | salary | age  |
++--------+-----------+------------+--------+------+
+|      1 | Angelina  | chicago    | 200000 |   30 |
+|      2 | Robert    | Austin     | 300000 |   26 |
+|      3 | Christian | Denver     | 100000 |   42 |
+|      4 | Kristen   | Washington | 500000 |   29 |
+|      5 | Russell   | Losangels  | 200000 |   36 |
+|      6 | Marry     | Canada     | 600000 |   48 |
++--------+-----------+------------+--------+------+
+6 rows in set (0.00 sec)
+
+MariaDB [anagha]> create table project(project_id int,emp_id int,department varchar(10));
+Query OK, 0 rows affected (0.28 sec)
+
+MariaDB [anagha]> insert into project values(101,1,'Testing');
+Query OK, 1 row affected (0.02 sec)
+
+MariaDB [anagha]> insert into project values(102,2,'Developmnt');
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [anagha]> insert into project values(103,3,'Designing');
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [anagha]> insert into project values(104,4,'Developmnt');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [anagha]> select * from project;
++------------+--------+------------+
+| project_id | emp_id | department |
++------------+--------+------------+
+|        101 |      1 | Testing    |
+|        102 |      2 | Developmnt |
+|        103 |      3 | Designing  |
+|        104 |      4 | Developmnt |
++------------+--------+------------+
+4 rows in set (0.00 sec)
+
+MariaDB [anagha]> select employee.emp_name,project.department from employee inner join project on employee.emp_id=project.emp_id;
++-----------+------------+
+| emp_name  | department |
++-----------+------------+
+| Angelina  | Testing    |
+| Robert    | Developmnt |
+| Christian | Designing  |
+| Kristen   | Developmnt |
++-----------+------------+
+4 rows in set (0.01 sec)
+
+MariaDB [anagha]> select employee.emp_name,project.department from employee left join project on employee.emp_id=project.emp_id;
++-----------+------------+
+| emp_name  | department |
++-----------+------------+
+| Angelina  | Testing    |
+| Robert    | Developmnt |
+| Christian | Designing  |
+| Kristen   | Developmnt |
+| Russell   | NULL       |
+| Marry     | NULL       |
++-----------+------------+
+6 rows in set (0.00 sec)
+
+MariaDB [anagha]> select employee.emp_name,project.department from employee right join project on employee.emp_id=project.emp_id;
++-----------+------------+
+| emp_name  | department |
++-----------+------------+
+| Angelina  | Testing    |
+| Robert    | Developmnt |
+| Christian | Designing  |
+| Kristen   | Developmnt |
++-----------+------------+
+4 rows in set (0.00 sec)
+
+MariaDB [anagha]> 
+
