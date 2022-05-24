@@ -1,0 +1,40 @@
+
+"to find the minimum number between two inputed numbers using procedure"
+
+set serveroutput on;
+declare
+a number:=&a;
+b number:=&b;
+c number;
+PROCEDURE findmin(x IN number, y IN number, z OUT number) IS
+BEGIN
+IF x < y THEN
+z:=x;
+ELSE
+z:=y;
+end if;
+end;
+begin
+findmin(a, b, c);
+dbms_output.put_line('Minimum number of two numbers ='||c);
+end;
+/
+
+
+
+
+
+SQL> edit pgm6a
+
+SQL> @ pgm6a
+Enter value for a: 25
+old   2:        a number:=&a;
+new   2:        a number:=25;
+Enter value for b: 12
+old   3:        b number:=&b;
+new   3:        b number:=12;
+Minimum number of two numbers =12
+
+PL/SQL procedure successfully completed.
+
+SQL>

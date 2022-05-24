@@ -1,0 +1,29 @@
+
+
+To find square of the number using procedure
+
+SQL> edit pgm7
+
+set serveroutput on;
+declare
+num number;
+result number;
+PROCEDURE square( x IN number, result OUT number) IS
+begin
+result:=x*x;
+end;
+
+begin
+num:=&num;
+square(num,result);
+dbms_output.put_line('Square of the number is='||result);
+end;
+/
+
+SQL> @ pgm7
+Enter value for num: 5
+old  10:        num:=&num;
+new  10:        num:=5;
+Square of the number is=25
+
+PL/SQL procedure successfully completed.

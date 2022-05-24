@@ -1,0 +1,22 @@
+set serveroutput on;
+declare
+	num number:=&num;
+	f number:=1;
+begin
+	for i in 1..num loop
+		f:=f*i;
+	end loop;
+	dbms_output.put_line('factorial='||f);
+end;
+/
+
+
+SQL> edit pgm2
+
+SQL> @ pgm2
+Enter value for num: 5
+old   2:        num number:=&num;
+new   2:        num number:=5;
+factorial=120
+
+PL/SQL procedure successfully completed.
