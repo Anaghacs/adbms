@@ -1,0 +1,86 @@
+SQL> create table customer(id int,name varchar(10),age int,address varchar(10),salary int);
+
+Table created.
+
+SQL> insert into customer values(101,'anagha',22,'tcr',50000);
+
+1 row created.
+
+SQL> insert into customer values(102,'swomya',30,'ekm',45000);
+
+1 row created.
+
+SQL> insert into customer values(103,'amalendu',25,'alv',30000);
+
+1 row created.
+
+SQL> insert into customer values(104,'megha',29,'tpr',35000);
+
+1 row created.
+
+SQL> select * from customer;
+
+        ID NAME              AGE ADDRESS        SALARY
+---------- ---------- ---------- ---------- ----------
+       101 anagha             22 tcr             50000
+       102 swomya             30 ekm             45000
+       103 amalendu           25 alv             30000
+       104 megha              29 tpr             35000
+
+SQL> edit triger
+
+CREATE OR REPLACE TRIGGER display_salary_changes
+BEFORE DELETE OR INSERT OR UPDATE ON customer
+FOR EACH ROW
+WHEN (NEW.ID > 0)
+DECLARE
+	sal_diff number;
+BEGIN
+	sal_diff := :NEW.salary - :OLD.salary;
+	dbms_output.put_line('Old salary:' || :OLD.salary);
+	dbms_output.put_line('New salary:' || :NEW.salary);
+	dbms_output.put_line('Salary difference:' ||sal_diff);
+END;
+/
+
+SQL> @ triger
+
+Trigger created.
+
+
+SQL> t2
+
+set serveroutput on;
+DECLARE
+	total_row number(2);
+BEGIN
+	UPDATE customer
+	SEt salary=salary+5000;
+	IF sql%notfound THEN
+		dbms_output.put_line('No customer updated');
+	ELSIF sql%found THEN
+		total_row :=sql%rowcount;
+		dbms_output.put_line(total_row || 'customers updated');
+	END IF;
+END;
+/
+
+OUTPUT
+
+SQL> @ t2
+Old salary:50000
+New salary:55000
+Salary difference:5000
+Old salary:45000
+New salary:50000
+Salary difference:5000
+Old salary:30000
+New salary:35000
+Salary difference:5000
+Old salary:35000
+New salary:40000
+Salary difference:5000
+4customers updated
+
+PL/SQL procedure successfully completed.
+

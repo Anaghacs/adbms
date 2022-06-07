@@ -1,0 +1,35 @@
+To check whether prime or not using function in pl/sql language
+
+set serveroutput on;
+declare
+n number;
+i number;
+J number;
+result number;
+rem number;
+FUNCTION prime(x IN OUT number)
+RETURN number
+IS
+flag boolean;
+BEGIN
+FOR i in 2..x/2 LOOP
+rem:=mod(x,i);
+if rem=0 then
+flag:=false;
+return flag;
+end if;
+end loop;
+flag:=true;
+return flag;
+end;
+
+begin
+n:&n;
+result:=prime(n);
+if result then
+dbms_output.put_line('Prime number');
+else
+dbms_output.put_line('Not prime number');
+end if;
+end;
+/

@@ -1,0 +1,120 @@
+SQL> create table class(id int,name varchar(15),class varchar(10));
+
+Table created.
+
+SQL> insert into class values(1,'shristee','MCA');
+
+1 row created.
+
+SQL> insert into class values(2,'Ajay','BCA');
+
+1 row created.
+
+SQL> insert into class values(3,'Shweta','MCA');
+
+1 row created.
+
+SQL> insert into class values(4,'Dolly','BCA');
+
+1 row created.
+
+SQL> insert into class values(5,'Henna','MCA');
+
+1 row created.
+
+SQL> insert into class values(6,'Kiran','BCA');
+
+1 row created.
+
+SQL> insert into class values(7,'Sonal','MCA');
+
+1 row created.
+
+SQL> insert into class values(8,'Dimple','BCA');
+
+1 row created.
+
+SQL> insert into class values(9,'Shyam','MCA');
+
+1 row created.
+
+SQL> insert into class values(10,'Mohit','BCA');
+
+1 row created.
+
+SQL> select * from class;
+
+        ID NAME            CLASS
+---------- --------------- ----------
+         1 shristee        MCA
+         2 Ajay            BCA
+         3 Shweta          MCA
+         4 Dolly           BCA
+         5 Henna           MCA
+         6 Kiran           BCA
+         7 Sonal           MCA
+         8 Dimple          BCA
+         9 Shyam           MCA
+        10 Mohit           BCA
+
+Explicit cursor
+---------------
+
+declare 
+	s_id class.id%type;
+	s_name class.name%type;
+	s_class class.class%type;
+	cursor cursor1 is
+	    select id,name,class from class;
+begin
+	open cursor1;
+	loop
+	fetch cursor1 into s_id,s_name,s_class;
+		exit when cursor1%notfound;
+		    dbms_output.put_line(s_id || ' ' ||s_name|| ' ' ||s_class);
+	end loop;
+	close cursor1;
+end;
+/
+
+
+output
+------
+
+
+SQL> edit cursor
+
+SQL> @cursor
+
+PL/SQL procedure successfully completed.
+
+
+Implicit cursor
+***************
+
+set serveroutput on;
+declare
+	total_rows number(2);
+begin
+	update class
+	set id=id+10;
+	if sql%found then
+		total_rows:=sql%rowcount;
+		dbms_output.put_line(total_rows|| 'students selected');
+	end if;
+end;
+/
+
+
+output
+------
+
+SQL> edit c1.sql
+
+SQL> @ c1
+10 students selected
+
+PL/SQL procedure successfully completed.
+
+
+

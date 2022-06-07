@@ -1,0 +1,41 @@
+
+to find the maximun no between two number using function
+
+set serveroutput on;
+declare
+a number:=&a;
+b number:=&b;
+c number;
+function findmax(x IN number,y IN number)
+RETURN number
+IS
+z number;
+begin
+if x > y then
+z:=x;
+else
+z:=y;
+end if;
+return z;
+end;
+begin
+c:=findmax(a,b);
+dbms_output.put_line('Maximum number of two numbers is ='||c);
+end;
+/
+
+
+
+
+SQL> edit pgm6
+
+SQL> @ pgm6
+Enter value for a: 12
+old   2:        a number:=&a;
+new   2:        a number:=12;
+Enter value for b: 25
+old   3:        b number:=&b;
+new   3:        b number:=25;
+Maximum number of two numbers is =25
+
+PL/SQL procedure successfully completed.

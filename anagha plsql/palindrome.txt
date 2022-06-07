@@ -1,0 +1,22 @@
+set serveroutput on;
+declare
+	num number:=&num;
+	m number;
+	rev number:=0;
+	r number;
+begin
+	m:=num;
+	while num>0
+	loop
+		r:=mod(num,10);
+		rev:=(rev*10)+r;
+		num:=trunc(num/10);
+	end loop;
+	if m=rev
+	then
+		dbms_output.put_line('Number is palindrome');
+	else
+		dbms_output.put_line('Number is not palindrome');
+	end if;
+end;
+/

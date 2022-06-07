@@ -1,0 +1,43 @@
+
+Anagha Sasidharan <anaghasasidharan38@gmail.com>
+Fri, 20 May, 15:31 (4 days ago)
+to me
+
+TO FIND SWAPING OPERATION IN TWO NUMBERS
+To find the swap in two numbers using procedure in pl/sql
+
+SQL> edit pgm8
+
+set serveroutput on;
+declare
+a number;
+b number;
+temp number;
+PROCEDURE swap(x IN  OUT number, y IN  OUT number) IS
+BEGIN
+
+temp:=x;
+x:=y;
+y:=temp;
+dbms_output.put_line('Before swapping:' ||a|| ' and ' ||b);
+END;
+
+BEGIN
+a:=&a;
+b:=&b;
+swap(a,b);
+dbms_output.put_line('After swapping:' ||a|| ' and ' ||b);
+END;
+/
+
+SQL> @ pgm8
+Enter value for a: 12
+old  15:        a:=&a;
+new  15:        a:=12;
+Enter value for b: 25
+old  16:        b:=&b;
+new  16:        b:=25;
+Before swapping:12 and 25
+After swapping:25 and 12
+
+PL/SQL procedure successfully complete
